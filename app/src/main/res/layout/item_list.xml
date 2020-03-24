@@ -8,7 +8,12 @@
             name="viewModel"
             type="com.rafaelm.androidmvvm.MainViewModel" />
     </data>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+        android:onClick="@{() -> viewModel.itemClick(user)}"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">

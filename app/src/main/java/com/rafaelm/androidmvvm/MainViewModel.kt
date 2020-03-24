@@ -6,6 +6,11 @@ import androidx.lifecycle.ViewModel
 class MainViewModel : ViewModel() {
 
     private val user = MutableLiveData<List<User>>()
+    private lateinit var navigator : MainNavigator
+
+    fun setNavigator(navigator: MainNavigator){
+        this.navigator = navigator
+    }
 
     fun getUser(): MutableLiveData<List<User>> {
         setUser()
@@ -31,6 +36,10 @@ class MainViewModel : ViewModel() {
         users.add(User("oretei", "1243536a2"))
 
         this.user.value = users
+    }
+
+    fun itemClick(user: User) {
+        navigator.onItemClick(user)
     }
 
 //      atualiza a tela sem precisar reiniciar
