@@ -19,4 +19,12 @@ class MainViewModel : ViewModel() {
 
         this.user.value = user
     }
+
+    fun updateUser(){
+        val user = User()
+        user.name = "Update"
+        user.email = "Update"
+
+        this.user.value = user
+    }
 }

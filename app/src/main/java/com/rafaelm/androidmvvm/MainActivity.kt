@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         viewModel.getUser().observe(this, Observer { user ->
+            binding.viewModel = viewModel
             binding.user = user
         })
 
