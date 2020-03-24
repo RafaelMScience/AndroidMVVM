@@ -19,6 +19,7 @@
         android:padding="16dp">
 
         <TextView
+            android:textColor="@{user.isMark() ? @color/markText : @color/normalText}"
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

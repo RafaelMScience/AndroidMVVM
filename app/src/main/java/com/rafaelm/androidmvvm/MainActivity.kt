@@ -1,5 +1,6 @@
 package com.rafaelm.androidmvvm
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,8 @@ class MainActivity : AppCompatActivity(), MainNavigator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -28,7 +30,21 @@ class MainActivity : AppCompatActivity(), MainNavigator {
     }
 
     override fun onItemClick(user: User) {
-        AlertDialog.Builder(this).setMessage(user.name + "\n" + user.email).show()
+        val alert = AlertDialog.Builder(this)
+        alert.setMessage(user.name+ "\n" + user.email)
+        if(user.isMark.get()){
+            alert.setPositiveButton("UNMARK") { dialog:DialogInterface, wich ->
+                user.isMark.set(false)
+                dialog.dismiss()
+            }
+        }else{
+            alert.setPositiveButton("MARK") { dialog:DialogInterface, wich ->
+                user.isMark.set(true)
+                dialog.dismiss()
+            }
+        }
+
+        alert.show()
     }
 }
 
