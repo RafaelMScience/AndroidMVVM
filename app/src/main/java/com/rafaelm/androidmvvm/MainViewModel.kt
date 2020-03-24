@@ -20,4 +20,3 @@ class MainViewModel : ViewModel() {
         this.user.value = user
     }
 }
-
