@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rafaelm.androidmvvm.databinding.ActivityMainBinding
 
 
@@ -12,13 +13,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         viewModel.getUser().observe(this, Observer { user ->
-            binding.viewModel = viewModel
-            binding.user = user
+            binding.recyclerView.adapter = MainAdapter(user, viewModel)
         })
 
     }
